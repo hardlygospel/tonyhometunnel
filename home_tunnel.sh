@@ -37,7 +37,18 @@ clear
 echo -e "${BLD}${CYN}"
 cat << 'BANNER'
   _____              _  _  _       _   _
- TONY'S HOME TUNNEL 2026
+ |_   _|            ( )( )( )     | | | |
+   | |  ___  _ __   |/ |/ |/      | |_| | ___  _ __ ___   ___
+   | | / _ \| '_ \           _    |  _  |/ _ \| '_ ` _ \ / _ \
+  _| || (_) | | | |         ( )   | | | | (_) | | | | | |  __/
+ |_____\___/|_| |_|         |/    |_| |_|\___/|_| |_| |_|\___|
+
+        _____                        _
+       |_   _|                      | |
+         | |  _   _  _ __   _ __   ___| |
+         | | | | | || '_ \ | '_ \ / _ \ |
+        _| |_| |_| || | | || | | ||  __/ |
+       |_____|\__,_||_| |_||_| |_| \___|_|
 
 BANNER
 echo -e "${RST}${BLD}  Tony's Home Tunnel  ·  Reverse HTTPS Proxy  ·  2026${RST}"
@@ -333,32 +344,203 @@ LAN_IP=$(ipconfig getifaddr en0 2>/dev/null \
 print_banner() {
   local URL="$1" H="${1#https://}"
   echo ""
-  echo -e "${GRN}${BLD}╔══════════════════════════════════════════════════════════╗${RST}"
-  echo -e "${GRN}${BLD}║  ✅  TONY'S TUNNEL IS LIVE!                              ║${RST}"
-  echo -e "${GRN}${BLD}╠══════════════════════════════════════════════════════════╣${RST}"
-  echo -e "${GRN}${BLD}║${RST}  ${BLD}$URL${RST}"
-  echo -e "${GRN}${BLD}║${RST}  Port: ${BLD}443${RST}   Protocol: ${BLD}HTTPS/HTTP2${RST}   Sleep: ${BLD}PREVENTED${RST}"
-  echo -e "${GRN}${BLD}╚══════════════════════════════════════════════════════════╝${RST}"
+  echo -e "${GRN}${BLD}╔══════════════════════════════════════════════════════════════════╗${RST}"
+  echo -e "${GRN}${BLD}║  ✅  TONY'S TUNNEL IS LIVE                                       ║${RST}"
+  echo -e "${GRN}${BLD}╠══════════════════════════════════════════════════════════════════╣${RST}"
+  echo -e "${GRN}${BLD}║${RST}  Tunnel URL : ${BLD}$URL${RST}"
+  echo -e "${GRN}${BLD}║${RST}  Port       : ${BLD}443${RST}   Protocol: ${BLD}HTTPS / HTTP2${RST}   Sleep: ${BLD}PREVENTED${RST}"
+  echo -e "${GRN}${BLD}╚══════════════════════════════════════════════════════════════════╝${RST}"
   echo ""
-  echo -e "  ${CYN}${BLD}🌐 AWAY FROM HOME  (work network / mobile data)${RST}"
-  echo -e "  ─────────────────────────────────────────────────────"
-  echo -e "  Server : ${BLD}$H${RST}   Port: ${BLD}443${RST}"
-  echo -e "  Work Mac  → System Settings → Network → Proxies → Secure Web Proxy (HTTPS)"
-  echo -e "  iPhone    → Settings → Wi-Fi → ⓘ → Configure Proxy → Manual"
-  echo -e "  Android   → Settings → Wi-Fi → long-press → Modify → Advanced → Proxy: Manual"
+
+  # ── SECTION A: Away from home ────────────────────────────────
+  echo -e "${CYN}${BLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RST}"
+  echo -e "${CYN}${BLD}  🌐  AWAY FROM HOME  (work network, mobile data, café Wi-Fi)${RST}"
+  echo -e "${CYN}${BLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RST}"
+  echo -e "  Traffic goes:  Your device  →  Cloudflare  →  This Mac  →  Internet"
   echo ""
-  echo -e "  ${YLW}${BLD}🏠 ON YOUR HOME NETWORK  (phone on same Wi-Fi as this Mac)${RST}"
-  echo -e "  ─────────────────────────────────────────────────────"
+  echo -e "  ${BLD}Proxy server  :${RST}  ${GRN}${BLD}$H${RST}"
+  echo -e "  ${BLD}Proxy port    :${RST}  ${GRN}${BLD}443${RST}"
+  echo -e "  ${BLD}Proxy type    :${RST}  HTTPS  (also works as 'Secure Web Proxy')"
+  echo ""
+
+  echo -e "  ${YLW}${BLD}── iPhone / iPad ───────────────────────────────────────────${RST}"
+  echo -e "  1. Settings → Wi-Fi"
+  echo -e "  2. Tap the  ⓘ  next to your connected network"
+  echo -e "  3. Scroll down → Configure Proxy → tap ${BLD}Manual${RST}"
+  echo -e "  4. Fill in:"
+  echo -e "       Server     ${GRN}${BLD}$H${RST}"
+  echo -e "       Port       ${GRN}${BLD}443${RST}"
+  echo -e "       Auth       off (leave blank)"
+  echo -e "  5. Tap Save.  Test at:  http://whatismyip.com"
+  echo -e "  ${DIM}  Note: This only proxies Wi-Fi traffic. For mobile data, use a"
+  echo -e "  proxy app such as Shadowrocket or Surge (paid) that can set a"
+  echo -e "  system-wide proxy over cellular.${RST}"
+  echo ""
+
+  echo -e "  ${YLW}${BLD}── Android ─────────────────────────────────────────────────${RST}"
+  echo -e "  Stock Android (Pixel / most phones):"
+  echo -e "  1. Settings → Network & internet → Internet"
+  echo -e "  2. Long-press (or tap ⚙) your connected Wi-Fi network → Modify"
+  echo -e "  3. Expand ${BLD}Advanced options${RST}"
+  echo -e "  4. Proxy → ${BLD}Manual${RST}"
+  echo -e "       Proxy hostname   ${GRN}${BLD}$H${RST}"
+  echo -e "       Proxy port       ${GRN}${BLD}443${RST}"
+  echo -e "  5. Save.  Test at:  http://whatismyip.com"
+  echo ""
+  echo -e "  Samsung One UI:"
+  echo -e "  Settings → Connections → Wi-Fi → tap ⚙ next to network"
+  echo -e "  → View more → Proxy → Manual → same values as above."
+  echo -e "  ${DIM}  Note: Android proxy settings apply to that Wi-Fi network only."
+  echo -e "  For mobile data / all apps, use a proxy app such as"
+  echo -e "  Drony (free) or NetGuard.${RST}"
+  echo ""
+
+  echo -e "  ${YLW}${BLD}── Mac (away from home) ────────────────────────────────────${RST}"
+  echo -e "  System Settings → Network → select your active connection"
+  echo -e "  → Details… → Proxies → tick ${BLD}Secure Web Proxy (HTTPS)${RST}"
+  echo -e "       Server   ${GRN}${BLD}$H${RST}"
+  echo -e "       Port     ${GRN}${BLD}443${RST}"
+  echo -e "  Click OK → Apply."
+  echo ""
+  echo -e "  Or set it for this terminal session only:"
+  echo -e "  ${DIM}  export https_proxy=https://$H:443${RST}"
+  echo -e "  ${DIM}  export http_proxy=http://$H:443${RST}"
+  echo -e "  ${DIM}  export ALL_PROXY=http://$H:443${RST}"
+  echo ""
+
+  echo -e "  ${YLW}${BLD}── Linux (away from home) ──────────────────────────────────${RST}"
+  echo -e "  For the current terminal session:"
+  echo -e "  ${DIM}  export https_proxy=https://$H:443${RST}"
+  echo -e "  ${DIM}  export http_proxy=http://$H:443${RST}"
+  echo -e "  ${DIM}  export ALL_PROXY=http://$H:443${RST}"
+  echo ""
+  echo -e "  GNOME (Ubuntu):"
+  echo -e "  Settings → Network → Network Proxy → Manual"
+  echo -e "       HTTPS proxy   ${GRN}${BLD}$H${RST}  port  ${GRN}${BLD}443${RST}"
+  echo ""
+  echo -e "  KDE Plasma:"
+  echo -e "  System Settings → Network → Proxy → Use manually specified proxy"
+  echo -e "       HTTPS proxy   ${GRN}${BLD}$H${RST}  port  ${GRN}${BLD}443${RST}"
+  echo ""
+
+  echo -e "  ${YLW}${BLD}── Windows (away from home) ────────────────────────────────${RST}"
+  echo -e "  Settings → Network & internet → Proxy → Manual proxy setup → On"
+  echo -e "       Address   ${GRN}${BLD}$H${RST}"
+  echo -e "       Port      ${GRN}${BLD}443${RST}"
+  echo -e "  Or in PowerShell:"
+  echo -e '  ${DIM}  [System.Net.WebRequest]::DefaultWebProxy = New-Object System.Net.WebProxy("https://'"$H"':443")${RST}'
+  echo ""
+
+  # ── SECTION B: On your home network ──────────────────────────
+  echo -e "${YLW}${BLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RST}"
+  echo -e "${YLW}${BLD}  🏠  ON YOUR HOME NETWORK  (same Wi-Fi as this Mac — faster, no Cloudflare)${RST}"
+  echo -e "${YLW}${BLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RST}"
+  echo -e "  Traffic goes:  Your device  →  This Mac directly  →  Internet"
+  echo ""
+
   if [[ -n "$LAN_IP" ]]; then
-    echo -e "  Server : ${BLD}$LAN_IP${RST}   Port: ${BLD}$PROXY_PORT${RST}   ← direct, no Cloudflare"
-    echo -e "  ${DIM}Tip: set a DHCP reservation in your router to keep this IP permanent.${RST}"
+    echo -e "  ${BLD}Proxy server  :${RST}  ${GRN}${BLD}$LAN_IP${RST}   ${DIM}(this Mac's LAN IP)${RST}"
+    echo -e "  ${BLD}Proxy port    :${RST}  ${GRN}${BLD}$PROXY_PORT${RST}"
+    echo -e "  ${BLD}Proxy type    :${RST}  HTTP  (plain — no TLS needed on your home network)"
+    echo ""
+    echo -e "  ${DIM}💡 Router tip: set a DHCP reservation for this Mac's MAC address so"
+    echo -e "  $LAN_IP never changes. Look for 'DHCP Reservations' or 'Static Leases'"
+    echo -e "  in your router admin page (usually http://192.168.1.1 or http://10.0.0.1).${RST}"
+    echo ""
+    echo -e "  ${DIM}  To find your Mac's MAC address:  ifconfig en0 | grep ether${RST}"
   else
-    echo -e "  ${RED}LAN IP not detected.${RST} Check System Settings → Network → Wi-Fi → IP Address"
-    echo -e "  Use that IP + port ${BLD}$PROXY_PORT${RST} on your phone."
+    echo -e "  ${RED}  LAN IP could not be detected automatically.${RST}"
+    echo -e "  Find it yourself and use it as the proxy server + port ${BLD}$PROXY_PORT${RST}:"
+    echo ""
+    echo -e "  ${DIM}  Mac / Linux:   ipconfig getifaddr en0${RST}"
+    echo -e "  ${DIM}               # or: ifconfig en0 | grep 'inet '"
+    echo -e "  ${DIM}               # or: ip addr show | grep 'inet ' | grep -v '127.0'${RST}"
+    echo -e "  ${DIM}  Windows:       ipconfig | findstr /i 'IPv4'${RST}"
+    echo -e "  ${DIM}  Any device:    System Settings → Network → Wi-Fi → IP Address${RST}"
   fi
   echo ""
-  echo -e "  ${YLW}⚠️  Cloudflare URL changes every restart — copy it now!${RST}"
-  echo -e "  ${BLD}Press Ctrl+C to stop.${RST}"
+
+  echo -e "  ${YLW}${BLD}── iPhone / iPad (home network) ────────────────────────────${RST}"
+  if [[ -n "$LAN_IP" ]]; then
+    echo -e "  Settings → Wi-Fi → ⓘ → Configure Proxy → Manual"
+    echo -e "       Server   ${GRN}${BLD}$LAN_IP${RST}"
+    echo -e "       Port     ${GRN}${BLD}$PROXY_PORT${RST}"
+    echo -e "  Save.  Much faster than the Cloudflare URL."
+  else
+    echo -e "  Same steps as above — use your Mac's LAN IP + port ${BLD}$PROXY_PORT${RST}."
+  fi
+  echo ""
+
+  echo -e "  ${YLW}${BLD}── Android (home network) ──────────────────────────────────${RST}"
+  if [[ -n "$LAN_IP" ]]; then
+    echo -e "  Settings → Wi-Fi → long-press or ⚙ → Modify → Advanced → Proxy: Manual"
+    echo -e "       Proxy hostname   ${GRN}${BLD}$LAN_IP${RST}"
+    echo -e "       Proxy port       ${GRN}${BLD}$PROXY_PORT${RST}"
+    echo -e "  Save."
+  else
+    echo -e "  Same steps as above — use your Mac's LAN IP + port ${BLD}$PROXY_PORT${RST}."
+  fi
+  echo ""
+
+  echo -e "  ${YLW}${BLD}── Mac / Linux (home network) ──────────────────────────────${RST}"
+  if [[ -n "$LAN_IP" ]]; then
+    echo -e "  Terminal (this session only):"
+    echo -e "  ${DIM}  export http_proxy=http://$LAN_IP:$PROXY_PORT${RST}"
+    echo -e "  ${DIM}  export https_proxy=http://$LAN_IP:$PROXY_PORT${RST}"
+    echo -e "  ${DIM}  export ALL_PROXY=http://$LAN_IP:$PROXY_PORT${RST}"
+    echo ""
+    echo -e "  Verify proxy is reachable from another device:"
+    echo -e "  ${DIM}  curl -x http://$LAN_IP:$PROXY_PORT https://httpbin.org/ip${RST}"
+  else
+    echo -e "  ${DIM}  export http_proxy=http://<YOUR_MAC_LAN_IP>:$PROXY_PORT${RST}"
+    echo -e "  ${DIM}  export https_proxy=http://<YOUR_MAC_LAN_IP>:$PROXY_PORT${RST}"
+  fi
+  echo ""
+
+  # ── SECTION C: How to find the values yourself ───────────────
+  echo -e "${MAG}${BLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RST}"
+  echo -e "${MAG}${BLD}  🔍  HOW TO FIND THESE VALUES YOURSELF (for reference)${RST}"
+  echo -e "${MAG}${BLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RST}"
+  echo ""
+  echo -e "  ${BLD}This Mac's LAN IP (run on this Mac):${RST}"
+  echo -e "  ${DIM}  ipconfig getifaddr en0${RST}                       # Wi-Fi"
+  echo -e "  ${DIM}  ipconfig getifaddr en1${RST}                       # Ethernet on some models"
+  echo -e "  ${DIM}  ifconfig | grep 'inet ' | grep -v '127.0'${RST}   # all interfaces"
+  echo ""
+  echo -e "  ${BLD}Verify the proxy port is open and listening:${RST}"
+  echo -e "  ${DIM}  lsof -i :$PROXY_PORT${RST}                              # Mac / Linux"
+  echo -e "  ${DIM}  curl -v --proxy http://127.0.0.1:$PROXY_PORT https://httpbin.org/ip${RST}"
+  echo ""
+  echo -e "  ${BLD}Test the Cloudflare tunnel is working:${RST}"
+  echo -e "  ${DIM}  curl -v --proxy https://$H:443 https://httpbin.org/ip${RST}"
+  echo ""
+  echo -e "  ${BLD}Check what IP the outside world sees (without proxy):${RST}"
+  echo -e "  ${DIM}  curl https://httpbin.org/ip${RST}                   # Mac / Linux terminal"
+  echo -e "  ${DIM}  curl ifconfig.me${RST}"
+  echo ""
+  echo -e "  ${BLD}Check what IP goes through the proxy:${RST}"
+  echo -e "  ${DIM}  curl -x http://127.0.0.1:$PROXY_PORT https://httpbin.org/ip${RST}"
+  echo ""
+  echo -e "  ${BLD}View live tunnel log (in another terminal):${RST}"
+  echo -e "  ${DIM}  tail -f $LOG_FILE${RST}"
+  echo ""
+  echo -e "  ${BLD}View live connection activity (in another terminal):${RST}"
+  echo -e "  ${DIM}  tail -f $CONN_LOG${RST}"
+  echo ""
+
+  # ── Reminders ────────────────────────────────────────────────
+  echo -e "${RED}${BLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RST}"
+  echo -e "  ${YLW}${BLD}⚠️  IMPORTANT REMINDERS${RST}"
+  echo -e "${RED}${BLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RST}"
+  echo -e "  • The Cloudflare URL ${BLD}changes every time${RST} you restart this script."
+  echo -e "    Copy it now and update your proxy settings each session."
+  echo -e "  • Anyone who knows the Cloudflare URL can use your proxy."
+  echo -e "    Do not share it publicly — stop the tunnel when not needed."
+  echo -e "  • The LAN proxy ($PROXY_PORT) is accessible to ${BLD}anyone on your home network.${RST}"
+  echo -e "    Safe at home; don't use on public Wi-Fi."
+  echo -e "  • Remember to ${BLD}remove the proxy settings${RST} from your device when done."
+  echo -e "    Leaving them in place after stopping the tunnel will break your internet."
+  echo -e "  • ${BLD}Press Ctrl+C${RST} in this window to stop everything cleanly."
   echo ""
 }
 
