@@ -1,4 +1,6 @@
 # 🏠 Tony's Home Tunnel
+
+[![Stars](https://img.shields.io/github/stars/hardlygospel/home-proxy-tunnel?style=for-the-badge&color=yellow)](https://github.com/hardlygospel/home-proxy-tunnel/stargazers) [![Forks](https://img.shields.io/github/forks/hardlygospel/home-proxy-tunnel?style=for-the-badge&color=blue)](https://github.com/hardlygospel/home-proxy-tunnel/network/members) [![Last Commit](https://img.shields.io/github/last-commit/hardlygospel/home-proxy-tunnel?style=for-the-badge&color=green)](https://github.com/hardlygospel/home-proxy-tunnel/commits) [![License](https://img.shields.io/github/license/hardlygospel/home-proxy-tunnel?style=for-the-badge)](https://github.com/hardlygospel/home-proxy-tunnel/blob/main/LICENSE)
 ### *Browse from anywhere through your home connection*
 
 > A reverse HTTPS proxy tunnel that lets you browse the web through your home internet from work or your phone — no router changes, no static IP, no paid services. 🌐
