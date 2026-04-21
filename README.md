@@ -160,7 +160,8 @@ The free URL changes on every restart. For a permanent subdomain:
 
 ## 📄 Licence
 
+This project is licensed under the **GNU General Public License v3.0**.
 
----
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](https://github.com/hardlygospel/jellyfin-mediastack/blob/main/LICENSE)
 
-*Uses Cloudflare Tunnel (free tier) and a Python stdlib HTTP proxy — no third-party packages required.*
+You are free to use, modify, and distribute this software under the terms of the GPL-3.0. See the [full licence](https://github.com/hardlygospel/jellyfin-mediastack/blob/main/LICENSE) for details.
